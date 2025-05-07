@@ -1,4 +1,7 @@
 from fpdf import FPDF
+import os
+
+
 class PDF(FPDF):
     def footer(self):
         # Position at 1.5 cm from bottom
@@ -121,13 +124,15 @@ tech_stack = [
 "Tools:\u00A0 \u00A0Git, Azure DevOps, Postman, VS Code, Visual Studio, Docker (basic).",
 ]
 
+
 # Create PDF with updated contact info
 pdf = PDF()
 pdf.add_page()
 pdf.set_auto_page_break(auto=True, margin=15)
-pdf.add_font('Aptos', '', 'aptos-regular.ttf', uni=True)
-pdf.add_font('Aptos-italic','I','aptos-italic.ttf',uni=True)
-pdf.add_font('Aptos-bold', 'B', 'aptos-bold.ttf', uni=True)
+
+pdf.add_font('Aptos', '', "fonts/aptos-regular.ttf", uni=True)
+pdf.add_font('Aptos-italic','I',"fonts/aptos-italic.ttf",uni=True)
+pdf.add_font('Aptos-bold', 'B', "fonts/aptos-bold.ttf", uni=True)
 
 # Name and headline with improved horizontal line
 # Fill a cell with color
@@ -338,4 +343,4 @@ pdf.set_line_width(0.2)  # Reset default width
 pdf.ln(2)  # Add spacing after line
 
 # Save the PDF
-pdf.output("Sewlesew_Biazen_Service_Offer_Updated.pdf")
+pdf.output("exports/Sewlesew_Biazen_Resume_Updated.pdf")
