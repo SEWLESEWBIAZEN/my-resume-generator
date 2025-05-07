@@ -1,6 +1,4 @@
 from fpdf import FPDF
-import os
-
 
 class PDF(FPDF):
     def footer(self):
@@ -140,8 +138,10 @@ pdf.set_fill_color(241, 245, 249)
 pdf.set_font("Aptos-bold", 'B', 16)
 pdf.cell(0, 7, "Sewlesew Biazen", ln=True,align='C',fill=True)
 pdf.set_font("Aptos", '', 12)
+
 current_y = pdf.get_y()  # Get current Y position after name
 pdf.multi_cell(0, 8, "Full-Stack Web Developer | React(Next.js), ASP.NET Core, Node.js(Express.js), MongoDB, SQL, ABAP",fill=True)
+
 set_style("Aptos-italic", 'I',11,(50, 50, 50))
 pdf.multi_cell(0, 6, "sewlesewbiazen@gmail.com \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 "
 "+251961718044 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 https://linkedin.com/in/sewlesew-biazen-sfd " 
