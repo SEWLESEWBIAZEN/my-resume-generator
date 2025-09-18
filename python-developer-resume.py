@@ -14,59 +14,24 @@ def set_style(font="Aptos", style='', size=12, color=(0, 0, 0)):
     pdf.set_font(font, style, size)
     pdf.set_text_color(*color)
 
+
 prev_pros = [
     {
-        "title": "Gojo – US-Based Ethiopian Restaurant Website",
-        "description": [
-            "Boosted online reservations by 40% with a custom booking system and dynamic daily menus.",
-            "Increased customer engagement through interactive carousels and image-rich dish catalog.",
-            "Enabled staff efficiency with an admin dashboard to manage menus, reservations, and gallery content.",
-        ]
-    },
-    {
-        "title": "FluentQuest – AI-Powered Language Learning Platform",
-        "description": [
-            "Designed multi-level courses with real-time feedback, improving learner retention by 35%.",
-            "Built instructor tools for lesson uploads, quizzes, and challenges, reducing manual setup by 50%.",
-            "Developed progress tracking dashboards used by 1,000+ learners to visualize achievements.",
-        ]
-    },
-    {
-        "title": "Legal Office Document & Task Management – Ethiopian Airlines",
-        "description": [
-            "Reduced manual processing by 60% via automated document workflows and case tracking.",
-            "Implemented secure APIs (.NET + SQL Server) with real-time analytics and contract e-signing.",
-            "Built responsive Next.js 15 frontend, improving collaboration across 200+ legal staff.",
-        ]
-    },
-    {
-        "title": "Bankify – Secure Authentication with Role-Based Access",
-        "description": [
-            "Developed JWT-based login and claims-based authorization ensuring strict data privacy.",
-            "Improved security compliance by 100% while maintaining a seamless user experience.",
-            "Implemented scalable role management with .NET Core Identity for admins and customers.",
-        ]
-    },
-    {
-        "title": "Stripe Subscription Integration with Feature Gating",
-        "description": [
-            "Designed subscription tiers (Basic, Pro, Enterprise) with dynamic feature access, boosting MRR by 30%.",
-            "Built feature-flag system enabling seamless upgrades/downgrades without service downtime.",
-            "Integrated Stripe with React/Node.js for secure payments, improving monetization scalability.",
-        ]
-    },
+    "title" : "Built an Automated Resume Generator Using Python and FPDF",
+    "description" : [
+        "Created a smart resume generator script that turns structured experience data into styled PDFs using Python and FPDF.",
+        "Supports multiple resume formats for job-specific tailoring with dynamic font, layout, and sectioning.",
+        "Used by developers to generate and export PDF resumes directly from code, reducing time spent on formatting and styling."
+    ]
+}
 ]
 
 
 services = [
-    "End-to-End Full-Stack Web Application Development",
-    "Custom, SEO-Optimized Websites that Boost Visibility and Deliver Exceptional User Experiences",
-    "Interactive Admin Dashboards & Scalable Internal Tools",
-    "Secure API Development and Seamless Third-Party Integrations",
-    "Robust Authentication Systems with Role-Based Access Control",
-    "Payment Gateway Integration (Stripe, PayPal, etc.)",
-    "Performance Optimization for Speed, Scalability, and Mobile Responsiveness",
-    "Rapid Prototyping & MVP Development for SaaS, EdTech, and Startup Platforms",
+"Automation Workflows using Python, n8n, and Low-Code Tools",
+"AI-Powered Content and Workflow Automation",
+"Web Scraping & Data Pipeline Development with Python"
+
 ]
 
 clients = [
@@ -86,7 +51,7 @@ experience = [
                     "Enhanced SAP modules via RFC integration and report programming, cutting manual tasks by 50%.",
                     "Boosted ERP system performance while developing enterprise apps, ensuring 99% uptime."
                 ],        
-     "duration":"Apr 2024 - July 2025"
+     "duration":"Apr 2024 - Present"
      },
     {
     "company":"Addis International Bank(ADIB)", 
@@ -101,12 +66,10 @@ experience = [
     "company":"Freelance", 
      "title":"Full-stack Developer",
      "description": [
-        "Built custom website for a US-based Ethiopian restaurant, enhancing online presence and customer engagement.",
         "Built a desktop app for AAU that automated nationwide seismic data management.",
         "Delivered a data-driven solution improving earthquake tracking/analysis by 60%.",
-        
    ],
-     "duration":"Jun 2023 - July 2025"
+     "duration":"Jun 2023 - Present"
      },
     {
     "company":"Amhara Bank", 
@@ -118,7 +81,7 @@ experience = [
      },
 ]
 
-education=[  
+education=[
     {
         "institution":"Addis Ababa University",
         "location":"Addis Ababa, Ethiopia",        
@@ -129,12 +92,15 @@ education=[
 ]
 
 tech_stack = [
-"Languages:\u00A0 \u00A0C#, JavaScript(TypeScript), Python, C++.",
-"Frameworks:\u00A0 \u00A0ASP.NET Core, Node.js, Express.js, React.js, Next.js, Tailwind CSS.",
-"Database:\u00A0 \u00A0PostgreSQL,MS SQL Server, MongoDB. ",
-"Cloud:\u00A0 \u00A0Azure, Supabase, Firebase.",
-"Tools & Others:\u00A0 \u00A0Redis, RabbitMQ, gRPC, Git, Azure DevOps, Postman, VS Code, Visual Studio, Docker.",
+"Languages: Python, JavaScript (TypeScript), C#, C++",
+"Automation: n8n, Zapier, LangChain, Apify, Selenium, Playwright",
+"Frameworks: FastAPI, Node.js, Express.js, React.js, Next.js, Tailwind CSS",
+"AI & LLMs: OpenAI API, LangChain, OpenRouter, Transformers, HuggingFace",
+"Database & Data: Airtable, PostgreSQL, MS SQL Server, MongoDB, CSV/JSON manipulation",
+"Dev Tools: Git, Postman, Replit, VS Code, Docker (basic), Cursor AI",
+"Cloud & Integration: RESTful APIs, Webhooks, OAuth 2.0, Firebase, Supabase"
 ]
+
 
 
 # Create PDF with updated contact info
@@ -154,12 +120,11 @@ pdf.cell(0, 7, "Sewlesew Biazen", ln=True,align='C',fill=True)
 pdf.set_font("Aptos", '', 12)
 
 current_y = pdf.get_y()  # Get current Y position after name
-pdf.multi_cell(0, 6, "Full-Stack Web Developer | MERN & .NET Expert | Building Scalable, Secure, and User-Friendly Applications for Businesses",align='C',fill=True)
+pdf.multi_cell(0, 8, "Full-Stack Web Developer | React(Next.js), ASP.NET Core, Node.js(Express.js), MongoDB, SQL, ABAP",fill=True)
 
 set_style("Aptos-italic", 'I',11,(50, 50, 50))
-pdf.multi_cell(0, 6, "sewlesewbiazen65@gmail.com \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 "
-"+251961718044 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 " \
-"https://linkedin.com/in/sewlesew-biazen-sfd \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0" 
+pdf.multi_cell(0, 6, "sewlesewbiazen@gmail.com \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 "
+"+251961718044 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 https://linkedin.com/in/sewlesew-biazen-sfd " 
 " https://sewlesewbi.netlify.app \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 "
 "https://github.com/SEWLESEWBIAZEN \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 Addis Ababa, Ethiopia",align='C')  # ln=False prevents line break
 pdf.set_text_color(0, 0, 0)
@@ -181,35 +146,11 @@ pdf.set_draw_color(0)  # Reset to black
 pdf.set_line_width(0.2)  # Reset default width
 pdf.ln(2)  # Add spacing after line
 pdf.set_font("Aptos", '', 12)
-pdf.multi_cell(0, 6, "I’m a Full-Stack Web Developer with 3+ years of experience delivering scalable, user-friendly applications. I specialize in both MERN (MongoDB, Express, React, Node.js) and .NET (ASP.NET Core, C#, SQL Server), enabling me to build versatile solutions. I help startups and businesses create powerful, fast, and secure web applications — from full products to optimized features. With a focus on clean architecture, responsive design, and performance, I deliver solutions that drive growth and enhance user experience.")
+pdf.multi_cell(0, 6,
+"I design intelligent automation workflows using Python and low-code tools to streamline business processes. " \
+"With a strong foundation in API integration, AI/LLM-based automation, and web scraping, I build systems that are smart, scalable, "
+"and business-aligned. I take ownership of problems and deliver automation solutions that reduce manual tasks and increase efficiency.")
 pdf.ln(3)
-
-
-# Recent Projects section
-set_style("Aptos-bold", 'B', 14,(0,0,0))
-pdf.cell(0, 10, "Recent Projects:", ln=True)
-
-# Calculate position for horizontal line (after multi_cell)
-line_y = pdf.get_y() -1  # Add small spacing
-pdf.line(10, line_y, pdf.w - 10, line_y)  # Full width line with margins
-# Optional: Styled horizontal line (thinner/lighter)
-pdf.set_line_width(0.1)
-pdf.set_draw_color(200, 200, 200)  # Light gray
-pdf.line(10, line_y, pdf.w - 10, line_y)
-pdf.set_draw_color(0)  # Reset to black
-pdf.set_line_width(0.2)  # Reset default width
-pdf.ln(2)  # Add spacing after line
-
-for pro in prev_pros:  
-    set_style("Aptos-bold","B",12,(0,0,0))   
-    pdf.cell(0, 6, f"{pro['title']}", ln=True)  
-    set_style("Aptos","",12,(25,25,25))
-    for desc in pro['description']:
-         pdf.set_x(15)
-         pdf.multi_cell(0, 7, f"• {desc}")         
-    pdf.ln(3)
-
-pdf.add_page()
 
 # Experience Section
 pdf.set_font("Aptos-bold", 'B', 14)
@@ -278,6 +219,49 @@ for edu in education:
     set_style("Aptos", '', 12, (50, 50, 50))  
     pdf.cell(0, 5, f"• {edu['location']}", ln=True)    
     pdf.ln(3)  # Space between entries
+
+pdf.add_page()
+# Recent Projects section
+set_style("Aptos-bold", 'B', 14,(0,0,0))
+pdf.cell(0, 10, "Recent Projects:", ln=True)
+
+# Calculate position for horizontal line (after multi_cell)
+line_y = pdf.get_y() -1  # Add small spacing
+pdf.line(10, line_y, pdf.w - 10, line_y)  # Full width line with margins
+# Optional: Styled horizontal line (thinner/lighter)
+pdf.set_line_width(0.1)
+pdf.set_draw_color(200, 200, 200)  # Light gray
+pdf.line(10, line_y, pdf.w - 10, line_y)
+pdf.set_draw_color(0)  # Reset to black
+pdf.set_line_width(0.2)  # Reset default width
+pdf.ln(2)  # Add spacing after line
+
+for pro in prev_pros:  
+    set_style("Aptos-bold","B",12,(0,0,0))   
+    pdf.cell(0, 6, f"{pro['title']}", ln=True)  
+    set_style("Aptos","",12,(25,25,25))
+    for desc in pro['description']:
+         pdf.set_x(15)
+         pdf.multi_cell(0, 7, f"• {desc}")         
+    pdf.ln(3)
+
+
+pdf.set_font("Aptos-bold", 'B', 14)
+pdf.cell(0, 10, "Certifications & Learning:", ln=True)
+# Add horizontal line
+line_y = pdf.get_y()-1
+pdf.line(10, line_y, pdf.w - 10, line_y)
+pdf.set_line_width(0.1)
+pdf.set_draw_color(200, 200, 200)
+pdf.line(10, line_y, pdf.w - 10, line_y)
+pdf.set_draw_color(0)
+pdf.set_line_width(0.2)
+pdf.ln(2)
+set_style("Aptos", '', 12)
+pdf.set_x(15)
+pdf.cell(0, 6, "• LangChain for LLM Application Development – Udemy", ln=True)
+pdf.set_x(15)
+pdf.cell(0, 6, "• Python Automation & Scripting – Coursera", ln=True)
 
 # Tech Stack section
 pdf.set_font("Aptos-bold", 'B', 14)
@@ -359,4 +343,4 @@ pdf.set_line_width(0.2)  # Reset default width
 pdf.ln(2)  # Add spacing after line
 
 # Save the PDF
-pdf.output("exports/Sewlesew_Biazen_Resume_Updated.pdf")
+pdf.output("exports/Sewlesew_Biazen_Python_Developer_Resume_Updated.pdf")

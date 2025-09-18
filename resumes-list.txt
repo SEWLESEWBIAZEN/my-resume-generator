@@ -1,0 +1,245 @@
+
+resume versions
+    - General CV, talks about my entire self
+    - MERN stack developer resume
+    - full-stack developer resume
+    - front-end developer resume (react, nextjs, tailwindcss, redux, zustand, and other frontend stuffs)
+    - backend developer resume (.Net, SQL SERVER, Mongodb)
+    - backend developer resume (Express.js, Node.js, Mongodb, MS Sql Server)
+    - python developer (python, fastapi, mongodb, sql server)
+    - python automation engineer resume
+    - 
+
+
+
+
+
+
+    //fast api versions
+
+
+    from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
+from pydantic import BaseModel
+from typing import List, Optional
+from fpdf import FPDF
+import os
+import uuid
+
+# ---------- FastAPI setup ----------
+app = FastAPI(title="Dynamic Resume Generator")
+
+# ---------- Models ----------
+class Project(BaseModel):
+    title: str
+    description: List[str]
+
+class Experience(BaseModel):
+    company: str
+    title: str
+    description: List[str]
+    duration: str
+
+class Education(BaseModel):
+    institution: str
+    location: str
+    major: str
+    score: str
+    duration: str
+
+class ResumeData(BaseModel):
+    name: str
+    email: str
+    phone: str
+    linkedin: Optional[str] = ""
+    portfolio: Optional[str] = ""
+    github: Optional[str] = ""
+    location: str
+    headline: str
+    profile_summary: str
+    projects: List[Project] = []
+    experience: List[Experience] = []
+    education: List[Education] = []
+    tech_stack: List[str] = []
+    services: List[str] = []
+    clients: List[str] = []
+
+# ---------- PDF Generation ----------
+class PDF(FPDF):
+    def footer(self):
+        self.set_y(-15)
+        self.set_font('Arial', '', 10)
+        self.cell(0, 10, f'{self.page_no()}', 0, 0, 'C')
+
+def set_style(pdf, font="Arial", style='', size=12, color=(0, 0, 0)):
+    pdf.set_font(font, style, size)
+    pdf.set_text_color(*color)
+
+def generate_resume_pdf(data: ResumeData) -> str:
+    pdf = PDF()
+    pdf.add_page()
+    pdf.set_auto_page_break(auto=True, margin=15)
+
+    # Name & Headline
+    pdf.set_font("Arial", 'B', 16)
+    pdf.cell(0, 7, data.name, ln=True, align='C')
+    pdf.set_font("Arial", '', 12)
+    pdf.multi_cell(0, 6, data.headline, align='C')
+    pdf.ln(2)
+
+    # Contact Info
+    contact_info = f"{data.email} | {data.phone} | {data.linkedin} | {data.portfolio} | {data.github} | {data.location}"
+    set_style(pdf, "Arial", 'I', 11, (50, 50, 50))
+    pdf.multi_cell(0, 6, contact_info, align='C')
+    pdf.set_text_color(0, 0, 0)
+    pdf.ln(3)
+
+    # Profile Summary
+    pdf.set_font("Arial", 'B', 14)
+    pdf.cell(0, 8, "Professional Profile", ln=True)
+    pdf.set_line_width(0.1)
+    pdf.set_draw_color(200, 200, 200)
+    pdf.line(10, pdf.get_y()-1, pdf.w - 10, pdf.get_y()-1)
+    pdf.set_draw_color(0)
+    pdf.set_font("Arial", '', 12)
+    pdf.multi_cell(0, 6, data.profile_summary)
+    pdf.ln(3)
+
+    # Projects
+    if data.projects:
+        pdf.set_font("Arial", 'B', 14)
+        pdf.cell(0, 10, "Recent Projects:", ln=True)
+        pdf.set_line_width(0.1)
+        pdf.set_draw_color(200, 200, 200)
+        pdf.line(10, pdf.get_y()-1, pdf.w - 10, pdf.get_y()-1)
+        pdf.set_draw_color(0)
+        pdf.set_font("Arial", '', 12)
+        pdf.ln(2)
+
+        for pro in data.projects:
+            pdf.set_font("Arial", 'B', 12)
+            pdf.cell(0, 6, pro.title, ln=True)
+            pdf.set_font("Arial", '', 12)
+            for desc in pro.description:
+                pdf.set_x(15)
+                pdf.multi_cell(0, 7, f"• {desc}")
+            pdf.ln(2)
+
+    # Experience
+    if data.experience:
+        pdf.add_page()
+        pdf.set_font("Arial", 'B', 14)
+        pdf.cell(0, 10, "Experience:", ln=True)
+        pdf.set_line_width(0.1)
+        pdf.set_draw_color(200, 200, 200)
+        pdf.line(10, pdf.get_y()-1, pdf.w - 10, pdf.get_y()-1)
+        pdf.set_draw_color(0)
+        pdf.set_font("Arial", '', 12)
+        pdf.ln(2)
+
+        for exp in data.experience:
+            pdf.set_font("Arial", 'B', 12)
+            pdf.cell(0, 6, exp.company, ln=False)
+            pdf.set_font("Arial", 'I', 12)
+            pdf.cell(0, 6, exp.duration, ln=True, align='R')
+            pdf.set_x(13)
+            pdf.cell(0, 6, exp.title, ln=True)
+            pdf.set_x(15)
+            pdf.set_font("Arial", '', 12)
+            for desc in exp.description:
+                pdf.multi_cell(0, 7, f"• {desc}")
+            pdf.ln(2)
+
+    # Education
+    if data.education:
+        pdf.set_font("Arial", 'B', 14)
+        pdf.cell(0, 10, "Education:", ln=True)
+        pdf.set_line_width(0.1)
+        pdf.set_draw_color(200, 200, 200)
+        pdf.line(10, pdf.get_y()-1, pdf.w - 10, pdf.get_y()-1)
+        pdf.set_draw_color(0)
+        pdf.ln(2)
+        pdf.set_font("Arial", '', 12)
+
+        for edu in data.education:
+            pdf.set_font("Arial", 'B', 12)
+            pdf.cell(0, 6, edu.institution, ln=False)
+            pdf.set_font("Arial", 'I', 12)
+            pdf.cell(0, 6, edu.duration, ln=True, align='R')
+            pdf.set_x(15)
+            pdf.set_font("Arial", '', 12)
+            pdf.cell(0, 6, f"• {edu.major}", ln=True)
+            pdf.set_x(15)
+            pdf.set_font("Arial", 'I', 12)
+            pdf.cell(0, 6, f"****{edu.score}****", ln=True)
+            pdf.set_x(15)
+            pdf.set_font("Arial", '', 12)
+            pdf.cell(0, 5, f"• {edu.location}", ln=True)
+            pdf.ln(2)
+
+    # Tech stack
+    if data.tech_stack:
+        pdf.set_font("Arial", 'B', 14)
+        pdf.cell(0, 10, "Technical Skills:", ln=True)
+        pdf.set_line_width(0.1)
+        pdf.set_draw_color(200, 200, 200)
+        pdf.line(10, pdf.get_y()-1, pdf.w - 10, pdf.get_y()-1)
+        pdf.set_draw_color(0)
+        pdf.set_font("Arial", '', 12)
+        pdf.ln(2)
+        for skill in data.tech_stack:
+            pdf.set_x(15)
+            pdf.cell(0, 6, f"• {skill}", ln=True)
+        pdf.ln(2)
+
+    # Services
+    if data.services:
+        pdf.set_font("Arial", 'B', 14)
+        pdf.cell(0, 10, "What I Can Help You With:", ln=True)
+        pdf.set_line_width(0.1)
+        pdf.set_draw_color(200, 200, 200)
+        pdf.line(10, pdf.get_y()-1, pdf.w - 10, pdf.get_y()-1)
+        pdf.set_draw_color(0)
+        pdf.set_font("Arial", '', 12)
+        pdf.ln(2)
+        for service in data.services:
+            pdf.set_x(15)
+            pdf.cell(0, 6, f"• {service}", ln=True)
+        pdf.ln(2)
+
+    # Clients
+    if data.clients:
+        pdf.set_font("Arial", 'B', 14)
+        pdf.cell(0, 10, "Who I Work With:", ln=True)
+        pdf.set_line_width(0.1)
+        pdf.set_draw_color(200, 200, 200)
+        pdf.line(10, pdf.get_y()-1, pdf.w - 10, pdf.get_y()-1)
+        pdf.set_draw_color(0)
+        pdf.set_font("Arial", '', 12)
+        pdf.ln(2)
+        for client in data.clients:
+            pdf.set_x(15)
+            pdf.cell(0, 6, f"• {client}", ln=True)
+        pdf.ln(2)
+
+    # Closing
+    pdf.set_font("Arial", 'I', 12)
+    pdf.multi_cell(0, 6, "I look forward to the opportunity to discuss how I can contribute to your projects and startups. Please feel free to contact me for any inquiries or project discussions.")
+    pdf.ln(5)
+
+    # Save PDF
+    filename = f"exports/{uuid.uuid4().hex}_resume.pdf"
+    os.makedirs("exports", exist_ok=True)
+    pdf.output(filename)
+    return filename
+
+# ---------- API Endpoint ----------
+@app.post("/generate_resume")
+async def generate_resume(resume_data: ResumeData):
+    try:
+        pdf_path = generate_resume_pdf(resume_data)
+        return FileResponse(pdf_path, media_type='application/pdf', filename="resume.pdf")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
